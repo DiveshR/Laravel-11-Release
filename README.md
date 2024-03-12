@@ -60,7 +60,11 @@ php artisan config:publish
 <img width="881" alt="Screenshot 2024-03-12 at 8 56 49 PM" src="https://github.com/DiveshR/Laravel-11-Release/assets/25860707/e6c02010-4cf2-4d07-812d-e2f56c663739">
 
 
-
+##### In Laravel 11  - Now We have only 3 default migrations.
+```
+0001_01_01_000000_create_users_table.php,0001_01_01_000001_create_cache_table.php,0001_01_01_000002_create_jobs_table.php
+```
+###### Date timestamps are removed from the database migrations.
 
 ### Features
 
