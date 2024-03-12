@@ -66,13 +66,61 @@ php artisan config:publish
 ```
 ###### Date timestamps are removed from the database migrations.
 
-### Features
+ ##### In Laravel 10 
+ ###### routes  directory
+ ```
+ api.php,channels.php,console.php,web.php files
+ ```
+##### In Laravel 11 - we have only 2 default route files.
+ ###### Http directory only have
+ ```
+ console.php,web.php files
+ ```
+There is no api.php
+ ###### artisan command to generate api route in laravel11
+```
+php artisan install:api
+```
+ ###### By running install:api command - It perform following actions.
+ - This install api command install sanctum package.
+ - Then uncomment line api: __DIR__.'/../routes/api.php', in bootstrap/app.php 
+ - Publish sanctum publish file in config directory.
+ - Create new migration for personal access tokens(2024_03_12_154117_create_personal_access_tokens_table.php)
+ - Create api.php route.
 
-#### 1. 
 
+#### Models - casts in Model
 
+ ##### In Laravel 10 - we define as protected cast property.
+ ###### app/Models/User.php 
+ ```
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+ ```
+##### In Laravel 11 - we define cast as protected casts() method.
 
+ ```
+     /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+ ```
 
 
 
