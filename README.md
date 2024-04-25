@@ -122,11 +122,28 @@ php artisan install:api
     }
  ```
 
-
-
-
-
-
-
-
-
+##### In Laravel 11 - Modifying Columns.
+When modifying a column, you must now explicitly include all the modifiers you want to keep on the column definition after it is changed.
+For example, imagine you have a migration that creates a votes column with the unsigned, default, and comment attributes:
+```
+Schema::create('users', function (Blueprint $table) {
+    $table->integer('votes')->unsigned()->default(1)->comment('The vote count');
+});
+```
+Later, you write a migration that changes the column to be nullable as well:
+```
+Schema::table('users', function (Blueprint $table) {
+    $table->integer('votes')->nullable()->change();
+});
+```
+In Laravel 10, this migration would retain the unsigned, default, and comment attributes on the column. However, in Laravel 11, the migration must now also include all of the attributes that were previously defined on the column. Otherwise, they will be dropped:
+```
+Schema::table('users', function (Blueprint $table) {
+    $table->integer('votes')
+        ->unsigned()
+        ->default(1)
+        ->comment('The vote count')
+        ->nullable()
+        ->change();
+});
+```
